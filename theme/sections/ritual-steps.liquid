@@ -1,0 +1,46 @@
+<section id="ritual" class="container section">
+  <div class="section-head section-head--center">
+    <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+    <h2 class="h2">{{ section.settings.heading }}</h2>
+  </div>
+  <ol class="ritual">
+    {%- for block in section.blocks -%}
+      <li class="m-reveal" {{ block.shopify_attributes }}>
+        <span class="num latin">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span>
+        <strong>{{ block.settings.title }}</strong>
+        <span>{{ block.settings.text }}</span>
+      </li>
+    {%- endfor -%}
+  </ol>
+</section>
+
+{% schema %}
+{
+  "name": "The ritual",
+  "tag": "div",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The ritual" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "من الأوردر لحد بابها" }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "القطعة" },
+        { "type": "text", "id": "text", "label": "Text", "default": "بنراجعها قطعة قطعة قبل ما تخرج." }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "The ritual",
+    "blocks": [
+      { "type": "step", "settings": { "title": "القطعة", "text": "بنراجعها قطعة قطعة قبل ما تخرج." } },
+      { "type": "step", "settings": { "title": "الظرف", "text": "ظرف كريم، والقطعة جواه في بوش صغير." } },
+      { "type": "step", "settings": { "title": "الختم", "text": "ختم شمع بوردو بلوجو الأربع قلوب." } },
+      { "type": "step", "settings": { "title": "اسمها", "text": "جواب باسمها، وQR لصفحتها." } }
+    ]
+  }]
+}
+{% endschema %}

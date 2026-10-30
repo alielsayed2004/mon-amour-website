@@ -1,0 +1,28 @@
+{%- if section.settings.text != blank -%}
+<div class="announce">
+  {%- if section.settings.link != blank -%}
+    <a href="{{ section.settings.link }}">{% render 'fill', text: section.settings.text %}</a>
+  {%- else -%}
+    {% render 'fill', text: section.settings.text %}
+  {%- endif -%}
+</div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "class": "section-announcement",
+  "enabled_on": { "groups": ["header"] },
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "info": "[الحد] is replaced by the free-shipping threshold from Theme settings → Shop info.",
+      "default": "الشحن مجاني فوق [الحد] جنيه · الدفع عند الاستلام لكل مصر · كل أوردر بيوصل هدية"
+    },
+    { "type": "url", "id": "link", "label": "Link" }
+  ],
+  "presets": [{ "name": "Announcement bar" }]
+}
+{% endschema %}

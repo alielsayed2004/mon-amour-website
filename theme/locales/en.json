@@ -1,0 +1,88 @@
+{
+  "general": {
+    "skip": "Skip to content",
+    "menu": "Main menu",
+    "home": "Home",
+    "search": "Search",
+    "whatsapp": "WhatsApp",
+    "whatsapp_order": "Order on WhatsApp",
+    "whatsapp_product": "Hi MON AMOUR, I'd like to order {{ title }}",
+    "buybar_cta": "Order — cash on delivery",
+    "cod": "Cash on delivery",
+    "egp": "EGP",
+    "from": "From",
+    "page": "Page {{ page }}",
+    "pagination": "Pagination",
+    "previous": "Previous",
+    "next": "Next",
+    "not_found": "This page doesn't exist… but the pieces do.",
+    "visit_shop": "Visit the shop"
+  },
+  "product": {
+    "gallery": "Product photos and video",
+    "name_label": "Her name on the letter (Latin letters)",
+    "name_label_short": "Name (Latin letters)",
+    "name_hint": "Latin letters only, up to 16. Written on the letter inside the envelope, with a QR to her page.",
+    "occasion": "Occasion",
+    "buy": "Order — cash on delivery",
+    "buy_short": "Order",
+    "sold_out": "Sold out",
+    "added": "Sealed in the envelope",
+    "add_error": "Something went wrong, try again or order on WhatsApp.",
+    "material": "Material",
+    "water": "Water & perfume",
+    "shipping": "Shipping"
+  },
+  "cart": {
+    "title": "Bag",
+    "link_label": {
+      "one": "Bag, 1 item",
+      "other": "Bag, {{ count }} items",
+      "zero": "Bag, empty"
+    },
+    "empty": "Your bag is empty.",
+    "continue": "Shop the pieces",
+    "quantity": "Quantity",
+    "remove": "Remove",
+    "update": "Update bag",
+    "note": "Order note (optional)",
+    "total": "Total",
+    "shipping_at_checkout": "Shipping is calculated at the next step.",
+    "checkout": "Checkout — cash on delivery",
+    "gift_upgrade": "Make it a Gift Box for +{{ amount }} EGP",
+    "free_shipping_left_html": "<span class=\"latin\">{{ amount }}</span> EGP more for free shipping",
+    "free_shipping_done": "Shipping is on us.",
+    "free_shipping_label": "Progress to free shipping"
+  },
+  "collection": {
+    "sort": "Sort by",
+    "apply": "Apply",
+    "empty": "No pieces here yet.",
+    "count": {
+      "one": "1 piece",
+      "other": "{{ count }} pieces"
+    }
+  },
+  "search": {
+    "title": "Find a piece",
+    "placeholder": "e.g. heart, earrings, gift",
+    "submit": "Search",
+    "results": {
+      "one": "1 result for “{{ terms }}”",
+      "other": "{{ count }} results for “{{ terms }}”"
+    }
+  },
+  "password": {
+    "email": "Your email",
+    "notify": "Tell me when you open",
+    "thanks": "Thanks, we'll let you know.",
+    "owner": "Store owner login",
+    "password": "Password",
+    "enter": "Enter"
+  },
+  "gift_card": {
+    "title": "Gift card",
+    "code": "Code",
+    "expired": "This gift card has expired or is disabled."
+  }
+}

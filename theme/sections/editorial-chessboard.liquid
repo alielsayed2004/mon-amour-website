@@ -1,0 +1,63 @@
+{%- comment -%} 07 EDITORIAL CHESSBOARD — AI shoot system shots (R2 / R7 / R8) alternating with big English words. {%- endcomment -%}
+<section class="night" aria-label="Editorial">
+  <div class="chess">
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when 'photo' -%}
+          {%- if block.settings.image != blank -%}
+            {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '400, 600, 900', sizes: '(max-width: 760px) 50vw, 33vw', alt: block.settings.alt, class: 'chess__img' }}
+          {%- elsif block.settings.fallback != blank -%}
+            <img class="chess__img" src="{{ block.settings.fallback | asset_url }}" alt="{{ block.settings.alt | escape }}" loading="lazy" width="600" height="750" {{ block.shopify_attributes }}>
+          {%- endif -%}
+        {%- when 'word' -%}
+          <div class="chess__word chess__word--{{ block.settings.style }}" {{ block.shopify_attributes }}>
+            <span class="latin{% if block.settings.italic %} is-italic{% endif %}">{{ block.settings.word }}</span>
+            <span class="chess__ar">{{ block.settings.line }}</span>
+          </div>
+      {%- endcase -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Editorial chessboard",
+  "tag": "div",
+  "max_blocks": 9,
+  "blocks": [
+    {
+      "type": "photo",
+      "name": "Photo",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image (4:5)" },
+        { "type": "text", "id": "alt", "label": "Alt text (Arabic)", "default": "ملك لابسة سلسلة MON AMOUR" },
+        { "type": "text", "id": "fallback", "label": "Bundled fallback file", "info": "Used only while no image is picked." }
+      ]
+    },
+    {
+      "type": "word",
+      "name": "Word tile",
+      "settings": [
+        { "type": "text", "id": "word", "label": "English word", "default": "Darling" },
+        { "type": "text", "id": "line", "label": "Arabic line", "default": "دلعي نفسك" },
+        { "type": "checkbox", "id": "italic", "label": "Italic", "default": false },
+        { "type": "select", "id": "style", "label": "Style", "default": "stage", "options": [
+          { "value": "stage", "label": "Bordeaux" },
+          { "value": "cream", "label": "Cream" }
+        ] }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Editorial chessboard",
+    "blocks": [
+      { "type": "photo", "settings": { "alt": "ملك لابسة سلسلة MON AMOUR في ممر جاليري", "fallback": "editorial-r2-malak-corridor.jpg" } },
+      { "type": "word", "settings": { "word": "Darling", "line": "دلعي نفسك", "italic": true, "style": "stage" } },
+      { "type": "photo", "settings": { "alt": "فريدة بلوك سهرة وسلسلة MON AMOUR", "fallback": "editorial-r7-farida-lounge.jpg" } },
+      { "type": "word", "settings": { "word": "Sealed", "line": "مقفولة ليكي إنتي", "style": "cream" } },
+      { "type": "photo", "settings": { "alt": "سلسلة MON AMOUR على الرقبة قريب", "fallback": "editorial-r8-malak-skin.jpg" } },
+      { "type": "word", "settings": { "word": "Forever", "line": "مش بتغير لونها", "style": "stage" } }
+    ]
+  }]
+}
+{% endschema %}

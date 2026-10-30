@@ -1,0 +1,5 @@
+{%- comment -%} Mobile sticky buy bar (all pages except product + cart, which render their own). {%- endcomment -%}
+<div class="buybar">
+  <a class="btn btn--bordeaux" href="{{ routes.all_products_collection_url }}">{{ 'general.buybar_cta' | t }}</a>
+  <a class="wa" href="{% render 'wa-url' %}" target="_blank" rel="noopener" aria-label="{{ 'general.whatsapp' | t }}"><svg width="20" height="20" aria-hidden="true"><use href="#i-wa"/></svg></a>
+</div>

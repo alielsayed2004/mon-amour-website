@@ -1,0 +1,27 @@
+{% layout none %}
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ 'gift_card.title' | t }} | {{ shop.name }}</title>
+{{ 'ibm-plex-sans-arabic-arabic-normal-500.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
+{{ 'fonts.css' | asset_url | stylesheet_tag }}
+{{ 'tokens.css' | asset_url | stylesheet_tag }}
+{{ 'base.css' | asset_url | stylesheet_tag }}
+{{ 'theme.css' | asset_url | stylesheet_tag }}
+{{ content_for_header }}
+</head>
+<body class="stage">
+<main class="container section gift-card">
+  <div class="letter-card">
+    <span class="eyebrow">MON AMOUR · Gift card</span>
+    <p class="price-line"><span class="latin">{{ gift_card.balance | money_without_currency | remove: '.00' }}</span><span>{{ 'general.egp' | t }}</span></p>
+    {%- if gift_card.expired or gift_card.enabled == false -%}<p>{{ 'gift_card.expired' | t }}</p>{%- endif -%}
+    <p>{{ 'gift_card.code' | t }}</p>
+    <p class="latin gift-card__code" dir="ltr">{{ gift_card.code | format_code }}</p>
+    <a class="btn btn--bordeaux" href="{{ shop.url }}">{{ 'general.visit_shop' | t }}</a>
+  </div>
+</main>
+</body>
+</html>

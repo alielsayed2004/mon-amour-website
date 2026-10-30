@@ -1,0 +1,35 @@
+{%- comment -%} Design-preview card shown only until real products exist in the store. Params: index {%- endcomment -%}
+{%- liquid
+  case index
+    when 1
+      assign img = 'product-spinning-flower.jpg'
+      assign name = 'Spinning Flower'
+      assign ar = 'سلسلة الوردة اللي بتلف'
+      assign price = '299'
+    when 2
+      assign img = 'product-petite-heart.jpg'
+      assign name = 'Petite Heart'
+      assign ar = 'سلسلة قلب ناعمة'
+      assign price = '199'
+    when 3
+      assign img = 'product-hob.jpg'
+      assign name = '«Hob» Necklace'
+      assign ar = 'سلسلة «حب» بالعربي'
+      assign price = '249'
+    else
+      assign img = 'product-pearl-huggies.jpg'
+      assign name = 'Pearl Huggies'
+      assign ar = 'حلق هجيز بلولية'
+      assign price = '249'
+  endcase
+-%}
+<a class="card m-reveal" href="{{ routes.all_products_collection_url }}">
+  <div class="card__media">
+    {%- if tag != blank -%}<span class="card__tag">{{ tag }}</span>{%- endif -%}
+    <img src="{{ img | asset_url }}" alt="{{ ar }}" loading="lazy" width="600" height="750">
+  </div>
+  <div class="card__meta">
+    <div><div class="card__name">{{ name }}</div><div class="card__ar">{{ ar }}</div></div>
+    <span class="card__price latin m-sweep">{{ price }}</span>
+  </div>
+</a>

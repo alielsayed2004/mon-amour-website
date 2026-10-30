@@ -1,0 +1,56 @@
+<header class="header">
+  <div class="container header__row">
+    <nav class="nav" aria-label="{{ 'general.menu' | t }}">
+      {%- for link in section.settings.menu.links -%}
+        <a href="{{ link.url }}"{% if link.active %} aria-current="page"{% endif %}>{{ link.title }}</a>
+      {%- endfor -%}
+    </nav>
+
+    <details class="menu-drawer" data-menu-drawer>
+      <summary class="icon-btn menu-btn" aria-label="{{ 'general.menu' | t }}"><svg width="22" height="22" aria-hidden="true"><use href="#i-menu"/></svg></summary>
+      <div class="menu-drawer__panel stage">
+        <nav aria-label="{{ 'general.menu' | t }}">
+          {%- for link in section.settings.menu.links -%}
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          {%- endfor -%}
+          <a href="{{ routes.search_url }}">{{ 'general.search' | t }}</a>
+          <a href="{% render 'wa-url' %}" target="_blank" rel="noopener">{{ 'general.whatsapp_order' | t }}</a>
+        </nav>
+      </div>
+    </details>
+
+    <a class="logo" href="{{ routes.root_url }}" aria-label="{{ shop.name }} — {{ 'general.home' | t }}" dir="ltr">
+      {%- if section.settings.logo != blank -%}
+        {{ section.settings.logo | image_url: width: 400 | image_tag: height: section.settings.logo_height, alt: shop.name, loading: 'eager', style: 'width:auto' }}
+      {%- else -%}
+        <svg width="34" height="34" aria-hidden="true"><use href="#rosette"/></svg><span>MON AMOUR</span>
+      {%- endif -%}
+    </a>
+
+    <div class="header__tools">
+      <a class="icon-btn" href="{{ routes.search_url }}" aria-label="{{ 'general.search' | t }}"><svg width="20" height="20" aria-hidden="true"><use href="#i-search"/></svg></a>
+      <a class="icon-btn cart-link" href="{{ routes.cart_url }}" aria-label="{{ 'cart.link_label' | t: count: cart.item_count }}">
+        <svg width="22" height="22" aria-hidden="true"><use href="#i-bag"/></svg>
+        {%- if cart.item_count > 0 -%}<span class="cart-count latin" aria-hidden="true">{{ cart.item_count }}</span>{%- endif -%}
+      </a>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "section-header",
+  "enabled_on": { "groups": ["header"] },
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo",
+      "info": "Use the official logo from the Brand Book. Empty = rosette + MON AMOUR wordmark."
+    },
+    { "type": "range", "id": "logo_height", "label": "Logo height", "min": 24, "max": 80, "step": 2, "unit": "px", "default": 40 },
+    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" }
+  ]
+}
+{% endschema %}

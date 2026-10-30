@@ -1,0 +1,15 @@
+{%- comment -%} Seal Press after "add to bag" (900ms, once). Shown by theme.js. {%- endcomment -%}
+<div class="seal-overlay" data-seal hidden>
+  <div class="seal-overlay__inner">
+    <svg width="120" height="120" viewBox="0 0 120 120" aria-hidden="true">
+      <g class="m-seal is-now">
+        <circle cx="60" cy="60" r="52" fill="#4A1424"/>
+        <circle cx="60" cy="60" r="40" fill="none" stroke="#E3C8A8" stroke-width="1.4"/>
+        <g fill="#E3C8A8" transform="translate(60 60) scale(.8)">
+          <use href="#heart" transform="rotate(45)"/><use href="#heart" transform="rotate(135)"/><use href="#heart" transform="rotate(225)"/><use href="#heart" transform="rotate(315)"/>
+        </g>
+      </g>
+    </svg>
+    <p>{{ 'product.added' | t }}</p>
+  </div>
+</div>

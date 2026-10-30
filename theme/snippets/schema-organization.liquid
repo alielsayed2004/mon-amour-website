@@ -1,0 +1,28 @@
+{%- comment -%} GEO/SEO: who the brand is. Keep settings.brand_sentence identical to the About page and all social bios. {%- endcomment -%}
+{%- liquid
+  assign same_as = ''
+  if settings.social_instagram != blank
+    assign same_as = same_as | append: settings.social_instagram | append: '|'
+  endif
+  if settings.social_tiktok != blank
+    assign same_as = same_as | append: settings.social_tiktok | append: '|'
+  endif
+  if settings.social_facebook != blank
+    assign same_as = same_as | append: settings.social_facebook | append: '|'
+  endif
+  assign same_as = same_as | split: '|'
+-%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": {{ shop.name | json }},
+  "alternateName": "MON AMOUR Jewels",
+  "url": {{ request.origin | json }},
+  "logo": {{ 'rosette.svg' | asset_url | prepend: 'https:' | json }},
+  "slogan": "For every darling",
+  "description": {{ settings.brand_sentence | json }},
+  "areaServed": "EG",
+  "sameAs": {{ same_as | json }}
+}
+</script>

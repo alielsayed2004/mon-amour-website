@@ -1,0 +1,27 @@
+<article class="container section page">
+  <div class="page__inner">
+    <span class="eyebrow">Guide</span>
+    <h1 class="h2">{{ article.title }}</h1>
+    <p class="muted"><time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: format: 'date' }}</time></p>
+    {%- if article.image != blank -%}
+        {%- assign image_alt = article.image.alt | default: article.title -%}
+      {{ article.image | image_url: width: 1200 | image_tag: loading: 'eager', widths: '600, 900, 1200', sizes: '(max-width: 880px) 100vw, 880px', alt: image_alt, class: 'page__image' }}
+    {%- endif -%}
+    <div class="rte">{{ article.content }}</div>
+    <a class="btn btn--bordeaux" href="{{ routes.all_products_collection_url }}">{{ 'cart.continue' | t }}</a>
+  </div>
+</article>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": {{ article.title | json }},
+  "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }},
+  "publisher": { "@type": "Organization", "name": {{ shop.name | json }} },
+  "mainEntityOfPage": {{ request.origin | append: article.url | json }}
+}
+</script>
+
+{% schema %}
+{ "name": "Article", "tag": "div", "settings": [] }
+{% endschema %}

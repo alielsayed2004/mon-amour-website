@@ -1,0 +1,23 @@
+{%- comment -%} Small guides that answer and sell (GEO): «إزاي تعرفي الستانلس الأصلي» · «هدية لصاحبتك بأقل من 300». {%- endcomment -%}
+{%- paginate blog.articles by 12 -%}
+<section class="container section blog">
+  <div class="section-head"><div><span class="eyebrow">Guides</span><h1 class="h2">{{ blog.title }}</h1></div></div>
+  <div class="blog__list">
+    {%- for article in blog.articles -%}
+      <a class="blog__item" href="{{ article.url }}">
+        {%- if article.image != blank -%}
+        {%- assign image_alt = article.image.alt | default: article.title -%}
+          {{ article.image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '400, 600, 800', sizes: '(max-width: 760px) 100vw, 33vw', alt: image_alt }}
+        {%- endif -%}
+        <strong>{{ article.title }}</strong>
+        <span class="muted">{{ article.excerpt_or_content | strip_html | truncatewords: 22 }}</span>
+      </a>
+    {%- endfor -%}
+  </div>
+  {% render 'pagination', paginate: paginate %}
+</section>
+{%- endpaginate -%}
+
+{% schema %}
+{ "name": "Blog", "tag": "div", "settings": [] }
+{% endschema %}

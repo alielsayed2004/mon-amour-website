@@ -1,0 +1,10 @@
+<section class="container section page">
+  <div class="page__inner">
+    <h1 class="h2">{{ page.title }}</h1>
+    <div class="rte">{% render 'fill', text: page.content %}</div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Page", "tag": "div", "settings": [] }
+{% endschema %}

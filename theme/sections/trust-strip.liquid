@@ -1,0 +1,30 @@
+<section class="trust" aria-label="{{ section.settings.label | escape }}">
+  <div class="container trust__row">
+    {%- for block in section.blocks -%}
+      <div class="trust__item" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Trust strip",
+  "tag": "div",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "text", "id": "label", "label": "Accessible label", "default": "ليه MON AMOUR" }
+  ],
+  "blocks": [
+    { "type": "item", "name": "Item", "settings": [{ "type": "text", "id": "text", "label": "Text", "default": "ستانلس 316L فرز أول" }] }
+  ],
+  "presets": [{
+    "name": "Trust strip",
+    "blocks": [
+      { "type": "item", "settings": { "text": "ستانلس 316L فرز أول" } },
+      { "type": "item", "settings": { "text": "مش بيغير لون مع المية" } },
+      { "type": "item", "settings": { "text": "الدفع عند الاستلام" } },
+      { "type": "item", "settings": { "text": "كل أوردر في ظرف باسمها" } }
+    ]
+  }]
+}
+{% endschema %}

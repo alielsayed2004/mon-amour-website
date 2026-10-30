@@ -1,0 +1,38 @@
+/* MON AMOUR · Design tokens (from the Brand Book, Oct 2026) */
+:root {
+  /* Named colours */
+  --seal-bordeaux: #4A1424;   /* stage: hero, gift, footer, primary buttons */
+  --letter-cream:  #F6EFE6;   /* shelf: page background, product area */
+  --sand-linen:    #EDE2D4;   /* product tiles, envelope */
+  --champagne:     #E3C8A8;   /* hairlines, gold accents, price on bordeaux */
+  --dried-rose:    #9E3B4F;   /* eyebrows, hover */
+  --ink:           #2B1B1F;   /* body text, night sections */
+  --muted:         #6B4A52;   /* secondary text on cream (passes 4.5:1) */
+  --brass:         #B89270;   /* chain line in illustrations only */
+  --night-shadow:  rgba(20, 6, 10, .35);
+
+  /* Type */
+  --font-display: 'Cormorant Garamond', Georgia, serif;  /* Latin headings, prices, logo */
+  --font-script:  'Pinyon Script', cursive;              /* her name only, Latin only */
+  --font-arabic:  'IBM Plex Sans Arabic', system-ui, sans-serif; /* all Arabic copy */
+
+  /* Type scale (desktop → mobile handled with clamp) */
+  --fs-hero:   clamp(32px, 4.2vw, 60px);
+  --fs-h2:     clamp(22px, 2.6vw, 36px);
+  --fs-price:  clamp(46px, 4.4vw, 64px);
+  --fs-body:   16px;
+  --fs-small:  14px;
+  --fs-eyebrow: 15px;   /* Cormorant, letter-spacing .28em, uppercase */
+
+  /* Layout */
+  --container: 1280px;
+  --gutter: 32px;
+  --section-y: clamp(64px, 8vw, 104px);
+
+  /* Motion — "Slow as silk" */
+  --ease-silk: cubic-bezier(.22, 1, .36, 1);
+  --ease-write: cubic-bezier(.65, 0, .35, 1);
+  --dur-fast: 350ms;
+  --dur-base: 800ms;
+  --dur-slow: 1600ms;
+}

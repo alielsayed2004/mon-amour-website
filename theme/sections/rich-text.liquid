@@ -1,0 +1,30 @@
+{%- comment -%} Simple text block. Use it at the top of ad landing pages so the first line repeats the ad hook. {%- endcomment -%}
+<section class="{% if section.settings.style == 'stage' %}stage {% endif %}rich-text">
+  <div class="container section rich-text__inner">
+    {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+    {%- if section.settings.heading != blank -%}<h2 class="h2">{{ section.settings.heading }}</h2>{%- endif -%}
+    {%- if section.settings.text != blank -%}<div class="rte">{% render 'fill', text: section.settings.text %}</div>{%- endif -%}
+    {%- if section.settings.button_label != blank -%}
+      <a class="btn {% if section.settings.style == 'stage' %}btn--cream{% else %}btn--bordeaux{% endif %}" href="{{ section.settings.button_link | default: routes.all_products_collection_url }}">{{ section.settings.button_label }}</a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Rich text",
+  "tag": "div",
+  "settings": [
+    { "type": "select", "id": "style", "label": "Style", "default": "cream", "options": [
+      { "value": "cream", "label": "Cream (shelf)" },
+      { "value": "stage", "label": "Bordeaux (stage)" }
+    ] },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow (English)" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "اكتبي اسمها، وإحنا نقفله في ظرف" },
+    { "type": "richtext", "id": "text", "label": "Text" },
+    { "type": "text", "id": "button_label", "label": "Button label" },
+    { "type": "url", "id": "button_link", "label": "Button link" }
+  ],
+  "presets": [{ "name": "Rich text" }]
+}
+{% endschema %}

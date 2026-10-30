@@ -1,0 +1,42 @@
+{%- comment -%}
+  Product card: real product photo + 5s in-hand video (plays on hover / when in view).
+  Params: product (required), tag (optional fallback label), sizes (optional)
+  Metafields used: custom.arabic_name, custom.card_tag, custom.video_in_hand
+{%- endcomment -%}
+{%- liquid
+  assign video = product.metafields.custom.video_in_hand.value
+  if video == blank
+    for media in product.media
+      if media.media_type == 'video'
+        assign video = media
+        break
+      endif
+    endfor
+  endif
+  assign card_tag = product.metafields.custom.card_tag.value | default: tag
+  assign ar_name = product.metafields.custom.arabic_name.value
+  assign image = product.featured_image
+  assign image_alt = image.alt | default: ar_name | default: product.title
+  assign card_sizes = sizes | default: '(max-width: 760px) 50vw, (max-width: 1280px) 25vw, 300px'
+-%}
+<a class="card m-reveal" href="{{ product.url }}">
+  <div class="card__media"{% if video != blank %} data-card-video{% endif %}>
+    {%- if card_tag != blank -%}<span class="card__tag">{{ card_tag }}</span>{%- endif -%}
+    {%- unless product.available -%}<span class="card__tag card__tag--out">{{ 'product.sold_out' | t }}</span>{%- endunless -%}
+    {%- if image != blank -%}
+      {{ image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '300, 450, 600, 900', sizes: card_sizes, alt: image_alt }}
+    {%- else -%}
+      <svg width="140" height="165" role="img" aria-label="{{ product.title | escape }}"><use href="#flower"/></svg>
+    {%- endif -%}
+    {%- if video != blank -%}
+      {{ video | video_tag: muted: true, loop: true, playsinline: true, preload: 'none', class: 'card__video' }}
+    {%- endif -%}
+  </div>
+  <div class="card__meta">
+    <div>
+      <div class="card__name">{{ product.title }}</div>
+      {%- if ar_name != blank %}<div class="card__ar">{{ ar_name }}</div>{% endif -%}
+    </div>
+    <span class="card__price latin m-sweep">{% render 'price', amount: product.price_min %}</span>
+  </div>
+</a>

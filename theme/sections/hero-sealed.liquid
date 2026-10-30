@@ -1,0 +1,62 @@
+{%- comment -%} 01 HERO — offer + price + CTA + WhatsApp on the first screen. Letter rises, seal presses, name writes itself. {%- endcomment -%}
+<section class="stage hero">
+  <div class="container section hero__grid">
+    <div class="hero__copy">
+      {%- if section.settings.kicker != blank -%}<span class="script hero__kicker m-up m-d1">{{ section.settings.kicker }}</span>{%- endif -%}
+      <h1 class="m-up m-d2">{{ section.settings.heading | newline_to_br }}</h1>
+      {%- if section.settings.lead != blank -%}<p class="hero__lead m-up m-d3">{{ section.settings.lead }}</p>{%- endif -%}
+      {%- if section.settings.from_price != blank -%}
+        <p class="price-line m-up m-d4"><span>{{ 'general.from' | t }}</span><span class="latin">{{ section.settings.from_price }}</span><span>{{ 'general.egp' | t }} · {{ 'general.cod' | t }}</span></p>
+      {%- endif -%}
+      <div class="hero__ctas m-up m-d4">
+        <a class="btn btn--cream" href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}">{{ section.settings.cta_label }}</a>
+        <a class="btn btn--ghost" href="{% render 'wa-url' %}" target="_blank" rel="noopener">{{ 'general.whatsapp_order' | t }}</a>
+      </div>
+    </div>
+    <div class="hero__visual" aria-hidden="true">
+      {%- if section.settings.image != blank -%}
+        {{ section.settings.image | image_url: width: 1280 | image_tag: class: 'hero__photo', widths: '480, 640, 960, 1280', sizes: '(max-width: 760px) 1px, 40vw', loading: 'eager', fetchpriority: 'high', alt: '' }}
+      {%- else -%}
+        <img class="hero__photo" src="{{ 'hero-r1-malak-lacquer.jpg' | asset_url }}" alt="" width="640" height="800" fetchpriority="high">
+      {%- endif -%}
+      <div class="envelope">
+        <div class="letter m-rise">
+          <span class="script m-write">Dear {{ section.settings.letter_name }},</span>
+          <span class="muted letter__line">{{ section.settings.letter_line }}</span>
+          <svg width="120" height="120"><use href="#flower"/></svg>
+        </div>
+        <svg class="envelope__body" viewBox="0 0 380 210">
+          <rect width="380" height="210" fill="#EDE2D4"/>
+          <path d="M0,210 L160,96 M380,210 L220,96" fill="none" stroke="#E3C8A8" stroke-width="1.2"/>
+          <path d="M0,0 L190,118 L380,0" fill="#E6D8C6" stroke="#E3C8A8" stroke-width="1.2"/>
+          <g class="m-seal">
+            <circle cx="190" cy="118" r="30" fill="#4A1424"/>
+            <circle cx="190" cy="118" r="22" fill="none" stroke="#E3C8A8" stroke-width="1"/>
+            <g fill="#E3C8A8" transform="translate(190 118) scale(.42)">
+              <use href="#heart" transform="rotate(45)"/><use href="#heart" transform="rotate(135)"/><use href="#heart" transform="rotate(225)"/><use href="#heart" transform="rotate(315)"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero · Sealed",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker (script, English)", "default": "for every darling" },
+    { "type": "textarea", "id": "heading", "label": "Heading", "default": "قطعة مش بتغير لونها،\nجوه ظرف باسمها." },
+    { "type": "textarea", "id": "lead", "label": "Lead", "default": "ستانلس فرز أول، وكل أوردر بيوصلها مختوم بالشمع وجواه جواب مكتوب باسمها." },
+    { "type": "text", "id": "from_price", "label": "From price (EGP)", "default": "199" },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "تسوقي البيست سيلرز" },
+    { "type": "url", "id": "cta_link", "label": "Button link" },
+    { "type": "image_picker", "id": "image", "label": "Photo (Malak · R1 Lacquer, 4:5)", "info": "Desktop only. Empty = bundled reference shot." },
+    { "type": "text", "id": "letter_name", "label": "Name on the letter (Latin)", "default": "Malak" },
+    { "type": "text", "id": "letter_line", "label": "Letter line", "default": "القطعة دي اتختارت مخصوص ليكي" }
+  ],
+  "presets": [{ "name": "Hero · Sealed" }]
+}
+{% endschema %}

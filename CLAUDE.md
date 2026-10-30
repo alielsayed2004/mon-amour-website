@@ -21,6 +21,7 @@ assets/logo/rosette.svg   simplified rosette for favicon/dev — replace with th
 assets/images/            put real photos here (see assets/images/README.md for the shot list)
 docs/                     the direction + build plans
 links.md                  links to the design canvas and brand docs
+theme/                    the Shopify OS 2.0 theme built from all of the above. Setup in theme/README.md
 ```
 
 ## Non-negotiable rules

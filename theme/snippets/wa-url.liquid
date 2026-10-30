@@ -1,0 +1,9 @@
+{%- comment -%} WhatsApp link with an optional prefilled message. Usage: {% render 'wa-url', text: 'message' %} {%- endcomment -%}
+{%- liquid
+  assign number = settings.whatsapp_number | remove: '+' | remove: ' ' | remove: '-'
+  if number == blank
+    assign number = '20XXXXXXXXXX'
+  endif
+  assign message = text | default: settings.whatsapp_message
+-%}
+https://wa.me/{{ number }}{% if message != blank %}?text={{ message | url_encode }}{% endif %}

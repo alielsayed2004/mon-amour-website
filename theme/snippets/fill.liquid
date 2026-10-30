@@ -1,0 +1,18 @@
+{%- comment -%}
+  Fills the shop-wide placeholders from theme settings: [الحد] free-shipping threshold,
+  [عدد] delivery days, [سياسة الاستبدال والمرتجع] exchange policy.
+  Unfilled ones stay visible in brackets on purpose, so nothing launches half-done.
+{%- endcomment -%}
+{%- liquid
+  assign out = text
+  if settings.free_shipping_threshold != blank
+    assign out = out | replace: '[الحد]', settings.free_shipping_threshold
+  endif
+  if settings.delivery_days != blank
+    assign out = out | replace: '[عدد]', settings.delivery_days
+  endif
+  if settings.exchange_policy != blank
+    assign out = out | replace: '[سياسة الاستبدال والمرتجع]', settings.exchange_policy
+  endif
+-%}
+{{- out -}}

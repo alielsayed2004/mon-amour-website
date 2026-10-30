@@ -1,0 +1,90 @@
+{%- comment -%}
+  Cart (cream = shelf). Free-shipping progress, her name shown on each piece,
+  Gift Box upgrade per line, COD on the checkout button.
+{%- endcomment -%}
+<section class="container section cart">
+  <h1 class="h2 cart__title">{{ 'cart.title' | t }}</h1>
+
+  {%- if cart.item_count > 0 -%}
+    {% render 'free-shipping' %}
+    <form action="{{ routes.cart_url }}" method="post" class="cart__form" data-cart-form novalidate>
+      <ul class="cart__items" role="list">
+        {%- for item in cart.items -%}
+          {%- liquid
+            assign line = forloop.index
+            assign gift = nil
+            for v in item.product.variants
+              if v.title contains 'Gift Box' and v.available and v.id != item.variant.id and v.price > item.variant.price
+                assign gift = v
+              endif
+            endfor
+          -%}
+          <li class="cart-item">
+            <a class="cart-item__media" href="{{ item.url }}" tabindex="-1" aria-hidden="true">
+              {%- if item.image != blank -%}
+                {{ item.image | image_url: width: 300 | image_tag: loading: 'lazy', widths: '150, 300', sizes: '120px', alt: '' }}
+              {%- else -%}
+                <svg width="80" height="94"><use href="#flower"/></svg>
+              {%- endif -%}
+            </a>
+            <div class="cart-item__info">
+              <a class="card__name" href="{{ item.url }}">{{ item.product.title }}</a>
+              {%- unless item.product.has_only_default_variant -%}<span class="cart-item__variant latin">{{ item.variant.title }}</span>{%- endunless -%}
+              {%- for p in item.properties -%}
+                {%- assign first_char = p.first | slice: 0 -%}
+                {%- if p.last != blank and first_char != '_' -%}
+                  <span class="cart-item__prop">
+                    {%- if p.first == 'Her name' -%}
+                      <span class="script">Dear {{ p.last }},</span>
+                    {%- elsif p.first == 'Occasion' -%}
+                      {{ 'product.occasion' | t }}: {{ p.last }}
+                    {%- else -%}
+                      {{ p.first }}: {{ p.last }}
+                    {%- endif -%}
+                  </span>
+                {%- endif -%}
+              {%- endfor -%}
+              {%- if gift -%}
+                {%- assign diff = gift.price | minus: item.variant.price | money_without_currency | remove: '.00' -%}
+                <button type="button" class="link-btn cart-item__upgrade" data-upgrade data-key="{{ item.key }}" data-variant="{{ gift.id }}" data-qty="{{ item.quantity }}" data-props="{{ item.properties | json | escape }}">
+                  {{ 'cart.gift_upgrade' | t: amount: diff }}
+                </button>
+              {%- endif -%}
+              <div class="cart-item__row">
+                <label class="sr-only" for="qty-{{ line }}">{{ 'cart.quantity' | t }}</label>
+                <input class="qty" type="number" id="qty-{{ line }}" name="updates[]" value="{{ item.quantity }}" min="0" inputmode="numeric" data-qty-input>
+                <a class="cart-item__remove" href="{{ item.url_to_remove }}">{{ 'cart.remove' | t }}</a>
+              </div>
+            </div>
+            <span class="card__price latin cart-item__price">{% render 'price', amount: item.final_line_price %}</span>
+          </li>
+        {%- endfor -%}
+      </ul>
+
+      <noscript><button class="btn btn--ghost-dark" type="submit" name="update">{{ 'cart.update' | t }}</button></noscript>
+
+      <div class="cart__summary">
+        <label for="cart-note">{{ 'cart.note' | t }}</label>
+        <textarea id="cart-note" name="note" rows="2">{{ cart.note }}</textarea>
+        <p class="price-line cart__total"><span>{{ 'cart.total' | t }}</span><span class="latin">{% render 'price', amount: cart.total_price %}</span><span>{{ 'general.egp' | t }} · {{ 'general.cod' | t }}</span></p>
+        <p class="muted cart__tax">{{ 'cart.shipping_at_checkout' | t }}</p>
+        <button class="btn btn--bordeaux cart__checkout" type="submit" name="checkout">{{ 'cart.checkout' | t }}</button>
+        <a class="btn btn--ghost-dark" href="{% render 'wa-url' %}" target="_blank" rel="noopener"><svg width="18" height="18" aria-hidden="true"><use href="#i-wa"/></svg>{{ 'general.whatsapp_order' | t }}</a>
+      </div>
+    </form>
+  {%- else -%}
+    <div class="cart__empty">
+      <svg width="140" height="165" aria-hidden="true"><use href="#flower"/></svg>
+      <p>{{ 'cart.empty' | t }}</p>
+      <a class="btn btn--bordeaux" href="{{ routes.all_products_collection_url }}">{{ 'cart.continue' | t }}</a>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Cart",
+  "tag": "div",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,39 @@
+{%- comment -%}
+  The QR letter page: /pages/for-you?n=Malak
+  MVP from the plan: one beautiful page; the name comes from the QR link (Latin letters only).
+  Ends with the UGC ask.
+{%- endcomment -%}
+<section class="stage for-you" data-for-you>
+  <div class="container section for-you__inner">
+    <div class="letter-card for-you__letter">
+      <span class="eyebrow">MON AMOUR · Jewels</span>
+      <span class="script m-write" data-name-out>Dear Darling,</span>
+      <p class="letter-card__line">{{ section.settings.line }}</p>
+      <div class="muted letter-card__body rte">{{ page.content | default: section.settings.body }}</div>
+      <div class="letter-card__foot"><span class="latin letter-card__sign">For every darling</span>
+        <svg width="56" height="56" aria-hidden="true" class="for-you__seal"><use href="#rosette"/></svg>
+      </div>
+    </div>
+    <div class="for-you__ask">
+      <h1 class="h2">{{ section.settings.ask_heading }}</h1>
+      <p>{{ section.settings.ask_text }}</p>
+      <a class="btn btn--cream" href="{% render 'wa-url', text: section.settings.wa_text %}" target="_blank" rel="noopener"><svg width="18" height="18" aria-hidden="true"><use href="#i-wa"/></svg>{{ section.settings.ask_button }}</a>
+      <a class="btn btn--ghost" href="{{ routes.root_url }}">{{ 'general.visit_shop' | t }}</a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "For you (QR letter)",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "line", "label": "First line", "default": "القطعة دي اتختارت ليكي إنتي." },
+    { "type": "richtext", "id": "body", "label": "Body (used when the page has no content)", "default": "<p>اتقفلت بالشمع عشان أول حد يفتحها يبقى إنتي. البسيها مع المية والبرفان — مش بتغير لونها.</p>" },
+    { "type": "text", "id": "ask_heading", "label": "Ask heading", "default": "صوّري ريأكشنك وابعتيه لنا" },
+    { "type": "text", "id": "ask_text", "label": "Ask text", "default": "فيديو صغير وإنتي بتفتحي الظرف — بنحب نشوفه، وممكن ننشره بإذنك." },
+    { "type": "text", "id": "ask_button", "label": "Button", "default": "ابعتيه على واتساب" },
+    { "type": "text", "id": "wa_text", "label": "WhatsApp message", "default": "وصلني ظرف MON AMOUR! ده الريأكشن بتاعي:" }
+  ]
+}
+{% endschema %}

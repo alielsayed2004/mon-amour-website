@@ -1,0 +1,52 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-collection",
+      "settings": {}
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "q-1": {
+          "type": "question",
+          "settings": {
+            "question": "هل القطع بتغير لونها؟",
+            "answer": "<p>لا. القطع ستانلس ستيل 316L، ماشية مع المية والبرفان.</p>"
+          }
+        },
+        "q-2": {
+          "type": "question",
+          "settings": {
+            "question": "الشحن بياخد قد إيه؟",
+            "answer": "<p>بنشحن لكل محافظات مصر خلال [عدد] أيام، والدفع عند الاستلام.</p>"
+          }
+        },
+        "q-3": {
+          "type": "question",
+          "settings": {
+            "question": "أكتب الاسم فين؟",
+            "answer": "<p>في صفحة القطعة، قبل «اطلبي». بنكتبه على الجواب جوه الظرف.</p>"
+          }
+        },
+        "q-4": {
+          "type": "question",
+          "settings": {
+            "question": "لو عايزة أبدل؟",
+            "answer": "<p>[سياسة الاستبدال والمرتجع]</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q-1",
+        "q-2",
+        "q-3",
+        "q-4"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "faq"
+  ]
+}

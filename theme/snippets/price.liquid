@@ -1,0 +1,2 @@
+{%- comment -%} Plain number for a money amount (EGP, no trailing ".00"). Usage: {% render 'price', amount: product.price %} {%- endcomment -%}
+{{- amount | money_without_currency | remove: '.00' -}}

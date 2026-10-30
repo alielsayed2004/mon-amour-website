@@ -1,0 +1,50 @@
+{%- comment -%} 06 SHOP BY MEANING {%- endcomment -%}
+<section class="container tiles-section">
+  <div class="meanings">
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign href = block.settings.link
+        if href == blank
+          assign handle = block.settings.word | handleize
+          assign href = routes.collections_url | append: '/' | append: handle
+        endif
+      -%}
+      <a class="meaning{% if block.settings.style != 'cream' %} meaning--{{ block.settings.style }}{% endif %}" href="{{ href }}" {{ block.shopify_attributes }}>
+        <span class="latin">{{ block.settings.word }}</span><span>{{ block.settings.line }}</span>
+      </a>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Shop by meaning",
+  "tag": "div",
+  "max_blocks": 6,
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Tile",
+      "settings": [
+        { "type": "text", "id": "word", "label": "English word", "default": "Hearts" },
+        { "type": "text", "id": "line", "label": "Arabic line", "default": "قلوب" },
+        { "type": "url", "id": "link", "label": "Link", "info": "Empty = /collections/<english word>" },
+        { "type": "select", "id": "style", "label": "Style", "default": "cream", "options": [
+          { "value": "cream", "label": "Cream (shelf)" },
+          { "value": "stage", "label": "Bordeaux (stage)" },
+          { "value": "night", "label": "Ink (night)" }
+        ] }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Shop by meaning",
+    "blocks": [
+      { "type": "tile", "settings": { "word": "Hearts", "line": "قلوب", "style": "cream" } },
+      { "type": "tile", "settings": { "word": "Words", "line": "كلمات ليها معنى", "style": "stage" } },
+      { "type": "tile", "settings": { "word": "Spin", "line": "قطع بتلف", "style": "cream" } },
+      { "type": "tile", "settings": { "word": "Gift Box", "line": "هدية جاهزة من 699", "style": "night" } }
+    ]
+  }]
+}
+{% endschema %}

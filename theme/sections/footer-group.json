@@ -1,0 +1,16 @@
+{
+  "type": "footer",
+  "name": "Footer group",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "shop": { "type": "menu", "settings": { "heading": "تسوقي", "menu": "footer" } },
+        "help": { "type": "menu", "settings": { "heading": "مساعدة", "menu": "help" } }
+      },
+      "block_order": ["shop", "help"],
+      "settings": {}
+    }
+  },
+  "order": ["footer"]
+}

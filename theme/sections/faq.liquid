@@ -1,0 +1,57 @@
+{%- comment -%} 09 FAQ — the direct answer goes in the first sentence (GEO). Outputs FAQPage schema. {%- endcomment -%}
+<section id="faq" class="container section">
+  <div class="faq">
+    <h2 class="h2 faq__title">{{ section.settings.heading }}</h2>
+    {%- for block in section.blocks -%}
+      <details {{ block.shopify_attributes }}>
+        <summary>{{ block.settings.question }}</summary>
+        <div class="faq__a">{% render 'fill', text: block.settings.answer %}</div>
+      </details>
+    {%- endfor -%}
+  </div>
+</section>
+{%- if section.settings.schema and section.blocks.size > 0 -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {%- for block in section.blocks -%}
+      {%- capture answer -%}{% render 'fill', text: block.settings.answer %}{%- endcapture -%}
+      { "@type": "Question", "name": {{ block.settings.question | json }}, "acceptedAnswer": { "@type": "Answer", "text": {{ answer | strip_html | strip | json }} } }{% unless forloop.last %},{% endunless %}
+    {%- endfor -%}
+  ]
+}
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "FAQ",
+  "tag": "div",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "أسئلة بتتسأل كتير" },
+    { "type": "checkbox", "id": "schema", "label": "Output FAQ schema", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "هل القطع بتغير لونها؟" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "info": "[عدد] and [سياسة الاستبدال والمرتجع] are filled from Theme settings → Shop info.", "default": "<p>لا. القطع ستانلس ستيل 316L، ماشية مع المية والبرفان.</p>" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "FAQ",
+    "blocks": [
+      { "type": "question", "settings": { "question": "هل القطع بتغير لونها؟", "answer": "<p>لا. القطع ستانلس ستيل 316L، ماشية مع المية والبرفان.</p>" } },
+      { "type": "question", "settings": { "question": "الشحن بياخد قد إيه؟", "answer": "<p>بنشحن لكل محافظات مصر خلال [عدد] أيام، والدفع عند الاستلام.</p>" } },
+      { "type": "question", "settings": { "question": "أكتب الاسم فين؟", "answer": "<p>في صفحة القطعة، قبل «اطلبي». بنكتبه على الجواب جوه الظرف.</p>" } },
+      { "type": "question", "settings": { "question": "لو عايزة أبدل؟", "answer": "<p>[سياسة الاستبدال والمرتجع]</p>" } }
+    ]
+  }]
+}
+{% endschema %}

@@ -1,0 +1,46 @@
+/* MON AMOUR · Motion system — "Slow as silk"
+   Rules: no bounce · 600–900ms · one moving thing per screen ·
+   motion never delays content (hero text is visible without JS) ·
+   prefers-reduced-motion = static. */
+
+/* 1 · Seal Press — loader, after "add to bag", order confirmation (900ms, once) */
+.m-seal { transform-box: fill-box; transform-origin: center; animation: m-press .9s var(--ease-silk) 1.5s both; }
+@keyframes m-press { 0% { transform: scale(1.7); opacity: 0 } 70% { transform: scale(.95); opacity: 1 } 100% { transform: scale(1); opacity: 1 } }
+
+/* 2 · Letter Rise — hero letter comes out of the envelope (1.6s, once) */
+.m-rise { animation: m-rise 1.6s var(--ease-silk) .3s both; }
+@keyframes m-rise { from { transform: translateY(120px) } to { transform: translateY(0) } }
+
+/* 3 · Gold Sweep — price / headings, on hover only (1.6s) */
+.m-sweep:hover, .card:hover .m-sweep {
+  background: linear-gradient(100deg, currentColor 38%, #FFF7EC 50%, currentColor 62%);
+  background-size: 320% 100%; -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: m-sweep 1.6s ease-in-out both;
+}
+@keyframes m-sweep { from { background-position: 100% 0 } to { background-position: 0 0 } }
+
+/* 4 · Name Write — her name writes itself in Pinyon (1.8s, on load + on every name change) */
+.m-write { animation: m-write 1.8s var(--ease-write) .9s both; }
+.m-write.is-rewrite { animation-delay: 0s; }
+@keyframes m-write { from { clip-path: inset(0 100% 0 0) } to { clip-path: inset(0 0 0 0) } }
+[dir="rtl"] .m-write { direction: ltr; }
+
+/* 5 · Petal Spin — spinning-flower illustration fallback (9s loop). Real product = 5s video. */
+.m-spin { transform-box: fill-box; transform-origin: center; animation: m-spin 9s linear infinite; }
+@keyframes m-spin { to { transform: rotate(360deg) } }
+
+/* 6 · Quiet Reveal — sections fade up line by line on scroll (700ms, 180ms stagger) */
+.m-reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s var(--ease-silk), transform .7s var(--ease-silk); }
+.m-reveal.is-in { opacity: 1; transform: none; }
+.m-reveal:nth-child(2) { transition-delay: .18s } .m-reveal:nth-child(3) { transition-delay: .36s } .m-reveal:nth-child(4) { transition-delay: .54s }
+.no-js .m-reveal { opacity: 1; transform: none; }
+
+/* Hero entrance (text) */
+.m-up { animation: m-up .8s var(--ease-silk) both; }
+.m-d1 { animation-delay: .1s } .m-d2 { animation-delay: .28s } .m-d3 { animation-delay: .46s } .m-d4 { animation-delay: .64s }
+@keyframes m-up { from { opacity: 0; transform: translateY(18px) } to { opacity: 1; transform: none } }
+
+@media (prefers-reduced-motion: reduce) {
+  .m-seal, .m-rise, .m-write, .m-spin, .m-up, .m-sweep { animation: none !important; }
+  .m-reveal { opacity: 1; transform: none; transition: none; }
+}

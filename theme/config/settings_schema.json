@@ -1,0 +1,43 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "MON AMOUR · Sealed Salon",
+    "theme_version": "1.0.0",
+    "theme_author": "MON AMOUR",
+    "theme_documentation_url": "https://github.com/alielsayed2004/mon-amour-website",
+    "theme_support_url": "https://github.com/alielsayed2004/mon-amour-website"
+  },
+  {
+    "name": "Brand",
+    "settings": [
+      { "type": "paragraph", "content": "Colours and fonts live in assets/tokens.css (single source of truth, from the Brand Book). Change them there, not here." },
+      { "type": "textarea", "id": "brand_sentence", "label": "Brand sentence (GEO)", "info": "Keep it identical on the About page, homepage schema and every social bio.", "default": "MON AMOUR براند اكسسوارات ستانلس 316L في مصر، من 199 جنيه، والدفع عند الاستلام. كل أوردر بيوصل في ظرف مختوم وجواه جواب باسمها." },
+      { "type": "image_picker", "id": "favicon", "label": "Favicon", "info": "Empty = bundled rosette." },
+      { "type": "image_picker", "id": "share_image", "label": "Social share image (1200×630)", "info": "Empty = bundled og-cover.jpg." }
+    ]
+  },
+  {
+    "name": "WhatsApp",
+    "settings": [
+      { "type": "text", "id": "whatsapp_number", "label": "WhatsApp number", "info": "International format without +, e.g. 201001234567." },
+      { "type": "text", "id": "whatsapp_message", "label": "Default message", "default": "أهلاً MON AMOUR، عايزة أطلب" }
+    ]
+  },
+  {
+    "name": "Shop info",
+    "settings": [
+      { "type": "paragraph", "content": "These fill the [placeholders] across the site. Unfilled ones stay visible in brackets on purpose." },
+      { "type": "number", "id": "free_shipping_threshold", "label": "Free-shipping threshold [الحد] (EGP)", "info": "Also drives the progress bar in the cart. Set the same rule in Settings → Shipping." },
+      { "type": "text", "id": "delivery_days", "label": "Delivery days [عدد]", "info": "e.g. 2–4" },
+      { "type": "textarea", "id": "exchange_policy", "label": "Exchange & return policy [سياسة الاستبدال والمرتجع]" }
+    ]
+  },
+  {
+    "name": "Social",
+    "settings": [
+      { "type": "url", "id": "social_instagram", "label": "Instagram", "default": "https://www.instagram.com/monamourjewels" },
+      { "type": "url", "id": "social_tiktok", "label": "TikTok", "default": "https://www.tiktok.com/@monamourjewels" },
+      { "type": "url", "id": "social_facebook", "label": "Facebook", "default": "https://www.facebook.com/monamourjewels" }
+    ]
+  }
+]
